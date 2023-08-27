@@ -1,39 +1,30 @@
-import Link from "next/link"
+import { use } from "react"
+import ReactMarkdown from "react-markdown"
 
-import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
+import { Ul } from "@/components/ul"
+
+const fetchMD = async () => {
+  return fetch(
+    "https://raw.githubusercontent.com/igorlourenco/learn-react-based-stuff/main/README.md"
+  )
+    .then((response) => response.text())
+    .then((text) => {
+      return text
+    })
+}
 
 export default function IndexPage() {
+  const mdFile = use(fetchMD())
+  console.log(mdFile)
   return (
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Beautifully designed components <br className="hidden sm:inline" />
-          built with Radix UI and Tailwind CSS.
+          project created to implement anything I want to learn about React and
+          related technologies
         </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          Accessible and customizable components that you can copy and paste
-          into your apps. Free. Open Source. And Next.js 13 Ready.
-        </p>
       </div>
-      <div className="flex gap-4">
-        <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
-        >
-          Documentation
-        </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          GitHub
-        </Link>
-      </div>
+      <ReactMarkdown components={{ ul: Ul }}>{mdFile}</ReactMarkdown>,
     </section>
   )
 }
