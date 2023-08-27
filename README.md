@@ -1,2 +1,2 @@
-- (https://ui.shadcn.com/)[https://ui.shadcn.com/]
+- [https://ui.shadcn.com/](https://ui.shadcn.com/)
 - app folder and layouts from next 13
